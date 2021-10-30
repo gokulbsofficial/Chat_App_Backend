@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
-dotenv.config({ path: "src/config/.env.config" });
+dotenv.config({ path: ".env.config" });
 
 // Server Config
 const SERVER_NODE_ENV = process.env.SERVER_NODE_ENV || "development";
 const SERVER_HOST = process.env.SERVER_HOST || "localhost";
-const SERVER_PORT = process.env.SERVER_PORT || 6000;
+const SERVER_PORT = process.env.SERVER_PORT || 5000;
 const SERVER_ACCESS_TOKEN_EXPIRE =
   process.env.SERVER_ACCESS_TOKEN_EXPIRE || "86400000"; // 1day
 const SERVER_REFRESH_TOKEN_EXPIRE =
@@ -19,8 +19,8 @@ const SERVER = {
 };
 
 // Client Config
-const CLIENT_HOST = process.env.CLIENT_HOST || "localhost";
-const CLIENT_PORT = process.env.CLIENT_PORT || 5000;
+const CLIENT_HOST = process.env.CLIENT_HOST || "https://socketserve.io/";
+const CLIENT_PORT = process.env.CLIENT_PORT || 3000;
 const CLIENT_GOOGLE_AUTH_CLIENT_ID =
   process.env.CLIENT_GOOGLE_AUTH_CLINENT_ID || "CLINENT_ID";
 

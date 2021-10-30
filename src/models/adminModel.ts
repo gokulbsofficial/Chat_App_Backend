@@ -106,6 +106,5 @@ const adminSchema = new Schema({
 //   return await bcrypt.compare(password, this.password);
 // };
 
-const Admin = mongoose.model<IAdmin>("Admins", adminSchema);
+export default mongoose.model<IAdmin>("Admins", adminSchema);
 
-export default Admin;

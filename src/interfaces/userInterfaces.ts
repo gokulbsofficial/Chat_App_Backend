@@ -12,7 +12,7 @@ export interface IUser extends Document {
   email?: string;
   userStatus?: string;
   profilePic?: string;
-  password?: string;
+  password: string;
   role?: "USER";
   twoStepVerification: boolean;
   accountStatus: IAccountStatus;

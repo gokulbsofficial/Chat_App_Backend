@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema } from "mongoose";
 
-const messageScheme = mongoose.Schema({
+const messageScheme = new Schema({
   authorId: {
     type: mongoose.Types.ObjectId,
     required: true,
@@ -42,7 +42,7 @@ const messageScheme = mongoose.Schema({
   },
 });
 
-const conversationSchema = mongoose.Schema(
+const conversationSchema = new Schema(
   {
     groupId: {
       type: mongoose.Types.ObjectId,
@@ -59,8 +59,8 @@ const conversationSchema = mongoose.Schema(
     messages: [messageScheme],
   },
   {
-    timestamp: true,
+    timestamps: true,
   }
 );
 
-module.exports = mongoose.model("Conversations", conversationSchema);
+export default mongoose.model("Conversations", conversationSchema);

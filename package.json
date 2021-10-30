@@ -2,10 +2,10 @@
   "name": "chat-app",
   "version": "1.1.0",
   "description": "Chating api server",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "rm -rf dist && yarn run build && node dist/server.js",
-    "dev": "ts-node-dev src/server.ts",
+    "start": "rm -rf dist && yarn run build && node dist/index.js",
+    "dev": "ts-node-dev src/index.ts",
     "build": "tsc -p ."
   },
   "author": "GokulSreejith",

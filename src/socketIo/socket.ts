@@ -11,7 +11,7 @@ import adminAuthSocket from "./adminAuthSocket";
 const SocketIo = (server: http.Server) => {
   const io: Server = require("socket.io")(server, {
     cors: {
-      origin: ["*"],
+      origin: ["https://gs-chat-app.netlify.app/","https://socketserve.io/"],
       methods: ["GET", "POST"],
       allowedHeaders: ["Authorization"],
       credentials: true,

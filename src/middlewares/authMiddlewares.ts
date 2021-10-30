@@ -166,47 +166,47 @@ type authParams = (
   next?: (err?: ExtendedError | undefined) => void
 ) => void;
 
-const authorization: authParams = async (socket, next) => {
-  try {
-    const token: string | null = socket.handshake.auth.token || null;
+// const authorization: authParams = async (socket, next) => {
+//   try {
+//     const token: string | null = socket.handshake.auth.token || null;
 
-    if (!token) {
-      return next(new ErrorResponse("Token Not Found"));
-    }
+//     if (!token) {
+//       return next(new ErrorResponse("Token Not Found"));
+//     }
 
-    const decoded = jwt.verify(token, accessToken.secret);
+//     const decoded = jwt.verify(token, accessToken.secret);
 
-    const user = await User.aggregate([
-      {
-        $match: { _id: ObjectId(decoded.id) },
-      },
-      {
-        $project: {
-          name: 1,
-          userName: 1,
-          mobile: 1,
-          profilePic: 1,
-          email: 1,
-          accountStatus: "$accounts.status",
-        },
-      },
-    ]);
+//     const user = await User.aggregate([
+//       {
+//         $match: { _id: ObjectId(decoded.id) },
+//       },
+//       {
+//         $project: {
+//           name: 1,
+//           userName: 1,
+//           mobile: 1,
+//           profilePic: 1,
+//           email: 1,
+//           accountStatus: "$accounts.status",
+//         },
+//       },
+//     ]);
 
-    if (!user) {
-      return next(new ErrorResponse("Unauthorized event"));
-    }
+//     if (!user) {
+//       return next(new ErrorResponse("Unauthorized event"));
+//     }
 
-    if (user.length !== 0 && user[0].accountStatus === "Blocked") {
-      return next(
-        new ErrorResponse(`Yours account is Blocked for Spam Reports`)
-      );
-    }
+//     if (user.length !== 0 && user[0].accountStatus === "Blocked") {
+//       return next(
+//         new ErrorResponse(`Yours account is Blocked for Spam Reports`)
+//       );
+//     }
 
-    (socket as any).user = user[0];
+//     (socket as any).user = user[0];
 
-    next();
-  } catch (error) {
-    logger.error(NAMESPACES, error.message, error);
-    return next(new ErrorResponse("Unauthorized event"));
-  }
-};
+//     next();
+//   } catch (error) {
+//     logger.error(NAMESPACES, error.message, error);
+//     return next(new ErrorResponse("Unauthorized event"));
+//   }
+// };
