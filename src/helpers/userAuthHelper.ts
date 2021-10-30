@@ -112,7 +112,7 @@ export const loginProfile = (data: ILoginProfile) => {
       await userFound.save();
 
       resolve({ message: "Profile created successfully" });
-    } catch (error) {
+    } catch (error: any) {
       reject({
         message: error.message || error.msg,
         code: error.code | error.name,
@@ -140,7 +140,7 @@ export const cloudPassword = (mobile: string, password: string) => {
         });
       }
 
-      const isMatch = (await userFound.password) || true;
+      const isMatch = await userFound.matchPasswords(userFound.password);
 
       if (!isMatch) {
         return reject({
@@ -149,7 +149,7 @@ export const cloudPassword = (mobile: string, password: string) => {
       }
 
       resolve({ message: "CloudPassword Success", verified: true });
-    } catch (error) {
+    } catch (error: any) {
       reject({
         message: error.message || error.msg,
         code: error.code | error.name,
@@ -192,7 +192,7 @@ export const forgetPasswod = (email: string) => {
       return resolve({
         message: `Sent Email Successfully ${email}`,
       });
-    } catch (error) {
+    } catch (error: any) {
       reject({
         message: error.message || error.msg,
         code: error.code | error.name,
@@ -234,7 +234,7 @@ export const resetPassword = (password: string, token: string) => {
       return resolve({
         message: `Cloud password reset successfully`,
       });
-    } catch (error) {
+    } catch (error: any) {
       reject({
         message: error.message || error.msg,
         code: error.code | error.name,

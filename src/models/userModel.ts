@@ -1,10 +1,14 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 import config from "../config/default";
 import { IUser } from "../interfaces/userInterfaces";
 import { generateId, generatePassword } from "../functions/default";
 
-const userSchema = new Schema({
+interface UserBaseDocument extends IUser, Document {
+  matchPasswords(password: string): boolean;
+}
+
+const userSchema = new Schema<UserBaseDocument>({
   name: {
     type: String,
     default: `User${Math.floor(Math.random() * 10000)}`,
@@ -32,11 +36,11 @@ const userSchema = new Schema({
   profilePic: {
     type: String,
   },
-  userAbout: {
-    type: String,
-    require: true,
-    default: `Hey there! I am using ChatApp`,
-  },
+  // userAbout: {
+  //   type: String,
+  //   require: true,
+  //   default: `Hey there! I am using ChatApp`,
+  // },
   password: {
     type: String,
     require: true,
@@ -110,19 +114,17 @@ const userSchema = new Schema({
   },
 });
 
-// userSchema.pre("save", async function (next) {
-//   if (!this.isModified("password")) {
-//     next();
-//   }
-//   const salt = await bcrypt.genSalt(10);
-//   this.password = await bcrypt.hash(this.password, salt);
-//   next();
-// });
+userSchema.pre("save", async function (this: UserBaseDocument, next: Function) {
+  if (!this.isModified("password")) {
+    next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
-// userSchema.methods.matchPasswords = async function (password) {
-//   return await bcrypt.compare(password, this.password);
-// };
+userSchema.methods.matchPasswords = async function (password) {
+  return await bcrypt.compare(password, this.password ?? "");
+};
 
-const User = mongoose.model<IUser>("Users", userSchema);
-
-export default User;
+export default mongoose.model<UserBaseDocument>("Users", userSchema);

@@ -1,6 +1,7 @@
 class ErrorResponse extends Error {
   code?: number | string;
   statusCode?: number;
+  // getErrorData(): { success: boolean; message: string };
 
   constructor(message: string, code?: number | string, statusCode?: number) {
     super(message);

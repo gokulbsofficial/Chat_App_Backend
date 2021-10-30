@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema } from "mongoose";
 
-const inboxSchema = mongoose.Schema({
+const inboxSchema = new Schema({
   type:{
     type:String,
     required:true,
@@ -45,4 +45,4 @@ const inboxSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("inboxes", inboxSchema);
+export default mongoose.model("inboxes", inboxSchema);
