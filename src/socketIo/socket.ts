@@ -1,20 +1,19 @@
-import { Server, Socket } from "socket.io";
+import { Server } from "socket.io";
 import http from "http";
 
 import config from "../config/default";
-import ErrorResponse from "../classes/errorResponse";
 import userSocket from "./userSocket";
 import adminSocket from "./adminSocket";
 import userAuthSocket from "./userAuthSocket";
 import adminAuthSocket from "./adminAuthSocket";
 
 const SocketIo = (server: http.Server) => {
-  const io: Server = require("socket.io")(server, {
+  const io: Server = new Server(server, {
     cors: {
       origin: ["https://gs-chat-app.netlify.app/","https://socketserve.io/"],
       methods: ["GET", "POST"],
       allowedHeaders: ["Authorization"],
-      credentials: true,
+      // credentials: true,
     },
   });
 
