@@ -65,7 +65,7 @@ const adminAuthSocket = (io: Server) => {
             token,
           },
         });
-      } catch (error) {
+      } catch (error: any) {
         const Error = new ErrorResponse(error.message, error.code);
         socket.emit(ADMIN_LOGIN, Error.getErrorData());
       }

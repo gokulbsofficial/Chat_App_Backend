@@ -72,7 +72,7 @@ const userAdminSocket = (io: Server) => {
           success: true,
           data: doLogin.data,
         });
-      } catch (error) {
+      } catch (error: any) {
         const Error = new ErrorResponse(error.message, error.code);
         socket.emit(VERIFY_OTP_EVENT, Error.getErrorData());
       }
@@ -89,7 +89,7 @@ const userAdminSocket = (io: Server) => {
           success: true,
           data: doLogin.data,
         });
-      } catch (error) {
+      } catch (error: any) {
         const Error = new ErrorResponse(error.message, error.code);
         socket.emit(LOGIN_PROFILE_EVENT, Error.getErrorData());
       }
@@ -110,7 +110,7 @@ const userAdminSocket = (io: Server) => {
           success: true,
           data: doLogin.data,
         });
-      } catch (error) {
+      } catch (error: any) {
         const Error = new ErrorResponse(error.message, error.code);
         socket.emit(CLOUD_PASSWORD_EVENT, Error.getErrorData());
       }

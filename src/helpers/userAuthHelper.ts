@@ -74,7 +74,7 @@ export const doLogin = (mobile: string, verified: boolean) => {
           });
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       reject({
         message: error.message || error.msg,
         code: error.code | error.name,
