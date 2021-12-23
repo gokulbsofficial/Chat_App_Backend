@@ -4,7 +4,7 @@
   "description": "Chating api server",
   "main": "index.js",
   "scripts": {
-    "start": "rm -rf dist && yarn run build && node dist/index.js",
+    "start": "rm -rf dist && npm run build && node dist/index.js",
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc -p ."
   },
