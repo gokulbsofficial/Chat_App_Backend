@@ -1,9 +1,9 @@
 class ErrorResponse extends Error {
   code?: number | string;
   statusCode?: number;
-  // getErrorData(): { success: boolean; message: string };
+  // function getErrorData(): { success: boolean; message: string };
 
-  constructor(message: string, code?: number | string, statusCode?: number) {
+  constructor(message?: string, code?: number | string, statusCode?: number) {
     super(message);
     this.code = code;
     this.statusCode = statusCode;
@@ -13,7 +13,7 @@ class ErrorResponse extends Error {
     }
   }
 
-  public getErrorData() {
+  public getErrorData = (): { success: boolean; message: string } => {
     if (this.code === 11000) {
       this.message = `Duplicate field value entered`;
     }
@@ -27,7 +27,7 @@ class ErrorResponse extends Error {
     }
     return {
       success: false,
-      message: this.message,
+      message: this.message || "Server Error",
     };
   }
 }

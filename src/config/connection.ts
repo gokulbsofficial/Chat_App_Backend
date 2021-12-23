@@ -2,7 +2,7 @@ import mongoose, { ConnectOptions } from "mongoose";
 import config from "./default";
 import logger from "./logger";
 
-const { MONGOOSE_URL, MONGOOSE_USER } = config.MONGOOSE;
+const { MONGO_URI, MONGO_USER } = config.MONGO;
 
 const MONGOOSE_OPTIONS: ConnectOptions = {
   useNewUrlParser: true,
@@ -10,14 +10,14 @@ const MONGOOSE_OPTIONS: ConnectOptions = {
   useFindAndModify: false,
   useCreateIndex: true,
 };
-const NAMESPACE = "MONGOOSE";
+const NAMESPACE = "MONGODB_CONFIG";
 
 const connect = async () => {
   try {
-    const conn = await mongoose.connect(MONGOOSE_URL, MONGOOSE_OPTIONS);
+    const conn = await mongoose.connect(MONGO_URI, MONGOOSE_OPTIONS);
     logger.info(
       NAMESPACE,
-      `MONGOOSE DATABASE:[${conn.connection.name}] connected in HOST:[${conn.connection.host}]-PORT:[${conn.connection.port}] by USER:[${MONGOOSE_USER}]`
+      `MONGO DB DATABASE [${conn.connection.name}] connected in HOST [${conn.connection.host}] PORT [${conn.connection.port}] by USER [${MONGO_USER}]`
     );
   } catch (error: any) {
     logger.error(NAMESPACE, error.message, error);

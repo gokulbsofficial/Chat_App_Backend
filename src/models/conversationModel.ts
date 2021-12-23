@@ -4,6 +4,7 @@ const messageScheme = new Schema({
   authorId: {
     type: mongoose.Types.ObjectId,
     required: true,
+    ref: "Users",
   },
 
   type: {
@@ -33,6 +34,7 @@ const messageScheme = new Schema({
   deletedUserId: [
     {
       type: mongoose.Types.ObjectId,
+      ref: "Users",
     },
   ],
 
@@ -46,15 +48,17 @@ const conversationSchema = new Schema(
   {
     groupId: {
       type: mongoose.Types.ObjectId,
+      ref: "Groups",
     },
     participants: [
       {
         type: mongoose.Types.ObjectId,
         required: true,
+        ref: "Users",
       },
     ],
     roles: {
-      type:Object
+      type: Object,
     },
     messages: [messageScheme],
   },

@@ -1,21 +1,24 @@
 import mongoose, { Schema } from "mongoose";
 
 const inboxSchema = new Schema({
-  type:{
-    type:String,
-    required:true,
+  type: {
+    type: String,
+    required: true,
   },
   userId: {
     type: mongoose.Types.ObjectId,
     required: true,
+    ref: "Users",
   },
   senderId: {
     type: mongoose.Types.ObjectId,
     required: true,
+    ref: "Users",
   },
   conversationId: {
     type: mongoose.Types.ObjectId,
     required: true,
+    ref:"Conversations"
   },
   lastMsg: { type: Object, default: {} },
   pinned: {

@@ -22,8 +22,6 @@ export const sentOtp = (mobile: string, channel: "sms" | "call") => {
         resolve({ message: `OTP sented to +${mobile}`, sid: verification.sid });
       })
       .catch((error: any) => {
-        console.log(error.message);
-        console.log(error.code);
         reject({ message: error.message, code: error.code });
       });
   });
@@ -47,8 +45,6 @@ export const verifyOtp = (mobile: string, code: string) => {
         }
       })
       .catch(async (error: any) => {
-        console.log(error.message);
-        console.log(error.code);
         reject({
           msg: error.message,
           code: error.code,

@@ -1,7 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.config" });
 
+
 // Server Config
+const DOTENV_STATE = process.env.DOTENV_STATE || false;
 const SERVER_NODE_ENV = process.env.SERVER_NODE_ENV || "development";
 const SERVER_HOST = process.env.SERVER_HOST || "localhost";
 const SERVER_PORT = process.env.SERVER_PORT || 5000;
@@ -16,6 +18,7 @@ const SERVER = {
   SERVER_PORT,
   SERVER_ACCESS_TOKEN_EXPIRE,
   SERVER_REFRESH_TOKEN_EXPIRE,
+  DOTENV_STATE
 };
 
 // Client Config
@@ -31,17 +34,18 @@ const CLIENT = {
 };
 
 // Moongose config
-const MONGOOSE_USER = process.env.MONGOOSE_USER || "gokul_sreejith";
-const MONGOOSE_PASSWORD = process.env.MONGOOSE_PASSWORD || "5006769GOKul+";
-const MONGOOSE_HOST = process.env.MONGOOSE_HOST || "localhost";
-const MONGOOSE_DATABASE = process.env.MONGOOSE_DATABASE || "ChatApp";
+const MONGO_USER = process.env.MONGO_USER || "gokul_sreejith";
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD || "5006769GOKul+";
+const MONGO_HOST = process.env.MONGO_HOST || "localhost";
+const MONGO_DATABASE = process.env.MONGO_DATABASE || "ChatApp";
+const MONGO_URI = process.env.MONGO_URI || `mongodb://localhost:27017/${MONGO_DATABASE}`
 
-const MONGOOSE = {
-  MONGOOSE_USER,
-  MONGOOSE_HOST,
-  MONGOOSE_PASSWORD,
-  MONGOOSE_DATABASE,
-  MONGOOSE_URL: `mongodb://localhost:27017/${MONGOOSE_DATABASE}`,
+const MONGO = {
+  MONGO_USER,
+  MONGO_HOST,
+  MONGO_PASSWORD,
+  MONGO_DATABASE,
+  MONGO_URI,
 };
 
 /* JWT Config */
@@ -76,9 +80,10 @@ const JWT = {
 const TWILIO_ACCOUNT_SID =
   process.env.TWILIO_ACCOUNT_SID || "ACTWILIO_ACCOUNT_SID";
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || "TWILIO_AUTH_TOKEN";
-const TWILIO_SERVICE_ID = process.env.TWILIO_SERVICE_ID || "TWILIO_SERVICE_ID";
+const TWILIO_SERVICE_ID = process.env.TWILIO_SERVICES_ID || "TWILIO_SERVICE_ID";
 const SMS_KEY = process.env.SMS_KEY || null;
-
+// SK16e1d240a0770c70ff0c81d73a9f2705
+// HOo8jtgYgNf8IVs6NJASXPO6QihtElkq
 const TWILIO = {
   TWILIO_ACCOUNT_SID,
   TWILIO_SERVICE_ID,
@@ -87,10 +92,10 @@ const TWILIO = {
 };
 
 /* ADMIN Config */
-const ADMIN_ACCESS_TOKEN_NAME = "AD-AccessToken";
-const ADMIN_ACCESS_SESSION_NAME = "AD-AccessSession";
-const ADMIN_REFRESH_TOKEN_NAME = "AD-RefreshToken";
-const ADMIN_REFRESH_SESSION_NAME = "AD-RefreshSession";
+const ADMIN_ACCESS_TOKEN_NAME = process.env.ADMIN_ACCESS_TOKEN_NAME || "AD-AccessToken";
+const ADMIN_ACCESS_SESSION_NAME = process.env.ADMIN_ACCESS_SESSION_NAME || "AD-AccessSession";
+const ADMIN_REFRESH_TOKEN_NAME = process.env.ADMIN_REFRESH_TOKEN_NAME || "AD-RefreshToken";
+const ADMIN_REFRESH_SESSION_NAME = process.env.ADMIN_REFRESH_SESSION_NAME || "AD-RefreshSession";
 
 const ADMIN = {
   ADMIN_ACCESS_TOKEN_NAME,
@@ -100,10 +105,10 @@ const ADMIN = {
 };
 
 /* USER Config */
-const USER_ACCESS_TOKEN_NAME = "US-AccessToken";
-const USER_ACCESS_SESSION_NAME = "US-AccessSession";
-const USER_REFRESH_TOKEN_NAME = "US-RefreshToken";
-const USER_REFRESH_SESSION_NAME = "US-RefreshSession";
+const USER_ACCESS_TOKEN_NAME = process.env.USER_ACCESS_TOKEN_NAME || "US-AccessToken";
+const USER_ACCESS_SESSION_NAME = process.env.USER_ACCESS_SESSION_NAME || "US-AccessSession";
+const USER_REFRESH_TOKEN_NAME = process.env.USER_REFRESH_TOKEN_NAME || "US-RefreshToken";
+const USER_REFRESH_SESSION_NAME = process.env.USER_REFRESH_SESSION_NAME || "US-RefreshSession";
 
 const USER = {
   USER_ACCESS_TOKEN_NAME,
@@ -113,7 +118,7 @@ const USER = {
 };
 
 const config = {
-  MONGOOSE,
+  MONGO,
   SERVER,
   CLIENT,
   JWT,

@@ -22,15 +22,6 @@ const adminAuthSocket = (io: Server) => {
       `New Connection Established in AUTH => ${socket.id}`
     );
 
-    socket.on("set-cookie", async (value: string) => {
-      socket.request.headers["set-cookie"] = await setCookies(
-        "ADMIN",
-        ["AccessToken"],
-        value
-      );
-      socket.emit("cookie-setted", "hi");
-    });
-
     socket.on(ADMIN_LOGIN, async (data: IAdminLogin) => {
       try {
         const { email, password } = data;

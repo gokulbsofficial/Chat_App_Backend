@@ -6,6 +6,8 @@ import cors from "cors";
 import db from "./config/connection";
 import logMiddleware from "./middlewares/logMiddleware";
 import config from "./config/default";
+import userAuthRouter from "./routers/userAuth";
+import ErrorResponse from "./classes/errorResponse";
 
 const { CLIENT_HOST } = config.CLIENT;
 
@@ -15,12 +17,13 @@ const app = express();
 /* Middlewares */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cors({
-    origin: ["https://gs-chat-app.netlify.app/","https://socketserve.io/"],
-    methods: ["GET", "POST"]
-  })
-);
+app.use(cors());
+//   (
+//   cors({
+//     origin: ["https://gs-chat-app.netlify.app/","https://socketserve.io/"],
+//     methods: ["GET", "POST"]
+//   })
+// );
 
 /* MONGOOSE connection */
 db.connect();
@@ -29,8 +32,10 @@ db.connect();
 app.use(logMiddleware);
 
 /* Routes */
+app.use("/auth/user", userAuthRouter);
+
 app.use("/", (req, res, next) => {
-  res.status(200).json({
+    res.status(200).json({
     success: true,
     message: "Welcome to GS-ChatApp",
   });

@@ -35,8 +35,8 @@ const userAdminSocket = (io: Server) => {
   const auth = io.of("/auth/user");
 
   auth.on(CONNECTION_EVENT, (socket: Socket) => {
-    const cookies = cookie.parse(socket.request.headers.cookie || "");
-    logger.info(NAMESPACE, `Cookies => `, cookies);
+    // const cookies = cookie.parse(socket.request.headers.cookie || "");
+    // logger.info(NAMESPACE, `Cookies => `, cookies);
     logger.info(
       NAMESPACE,
       `New Connection Established in AUTH => ${socket.id}`
@@ -50,14 +50,15 @@ const userAdminSocket = (io: Server) => {
           socket.emit(SENT_OTP_EVENT, {
             success: true,
             data: {
-              message: response.message,
+              message: "messagesended",
               sid: response.sid,
+              nextAction: "Verify_OTP"
             },
           });
         })
-        .catch((error: IErrorResponse) => {
-          const Error = new ErrorResponse(error.message, error.code);
-          socket.emit(SENT_OTP_EVENT, Error.getErrorData());
+        .catch((error: any) => {
+          const errResp = new ErrorResponse(error.message, error.code).getErrorData();
+          socket.emit(SENT_OTP_EVENT, errResp);
         });
     });
 
@@ -70,11 +71,11 @@ const userAdminSocket = (io: Server) => {
 
         socket.emit(VERIFY_OTP_EVENT, {
           success: true,
-          data: doLogin.data,
+          data: doLogin.data
         });
       } catch (error: any) {
-        const Error = new ErrorResponse(error.message, error.code);
-        socket.emit(VERIFY_OTP_EVENT, Error.getErrorData());
+        const errResp = new ErrorResponse(error.message, error.code).getErrorData();
+        socket.emit(VERIFY_OTP_EVENT, errResp);
       }
     });
 
@@ -90,8 +91,8 @@ const userAdminSocket = (io: Server) => {
           data: doLogin.data,
         });
       } catch (error: any) {
-        const Error = new ErrorResponse(error.message, error.code);
-        socket.emit(LOGIN_PROFILE_EVENT, Error.getErrorData());
+        const errResp = new ErrorResponse(error.message, error.code).getErrorData();
+        socket.emit(LOGIN_PROFILE_EVENT, errResp);
       }
     });
 
@@ -111,8 +112,8 @@ const userAdminSocket = (io: Server) => {
           data: doLogin.data,
         });
       } catch (error: any) {
-        const Error = new ErrorResponse(error.message, error.code);
-        socket.emit(CLOUD_PASSWORD_EVENT, Error.getErrorData());
+        const errResp = new ErrorResponse(error.message, error.code).getErrorData();
+        socket.emit(CLOUD_PASSWORD_EVENT, errResp);
       }
     });
 
@@ -129,9 +130,9 @@ const userAdminSocket = (io: Server) => {
             },
           });
         })
-        .catch((error: IErrorResponse) => {
-          const Error = new ErrorResponse(error.message, error.code);
-          socket.emit(FORGET_PASSWORD_EVENT, Error.getErrorData());
+        .catch((error: any) => {
+          const errResp = new ErrorResponse(error.message, error.code).getErrorData();
+          socket.emit(FORGET_PASSWORD_EVENT, errResp);
         });
     });
 
@@ -148,9 +149,9 @@ const userAdminSocket = (io: Server) => {
             },
           });
         })
-        .catch((error: IErrorResponse) => {
-          const Error = new ErrorResponse(error.message, error.code);
-          socket.emit(RESET_PASSWORD_EVENT, Error.getErrorData());
+        .catch((error: any) => {
+          const errResp = new ErrorResponse(error.message, error.code).getErrorData();
+          socket.emit(RESET_PASSWORD_EVENT, errResp);
         });
     });
 

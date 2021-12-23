@@ -24,6 +24,7 @@ export const doLogin = (mobile: string, verified: boolean) => {
         return resolve({
           data: {
             message: `New User Created`,
+            nextAction: "Create_Profile"
           },
         });
       }
@@ -40,39 +41,42 @@ export const doLogin = (mobile: string, verified: boolean) => {
           return resolve({
             data: {
               message: `Create your Profile`,
+              nextAction: "Create_Profile"
             },
           });
         }
 
         // If User has TwoStepVerification
-        if (status === "Active" && twoStepVerification === true && !verified) {
+        if (status === "Active" && twoStepVerification && !verified) {
           return resolve({
             data: {
               message: `Verify Two Step Verification`,
               twoStepVerification,
-            },
-          });
-        } else {
-          // User Login
-          userFound.accountLogs.lastSync = new Date();
-          await userFound.save();
-
-          const accessToken = await generateJwtToken(
-            {
-              userId: userFound._id,
-              userName: userFound.userName,
-            },
-            "ACCESS_TOKEN"
-          );
-
-          return resolve({
-            data: {
-              message: `Login Success`,
-              twoStepVerification,
-              token: accessToken,
+              nextAction: "Cloud_Password"
             },
           });
         }
+
+        // User Login
+        userFound.accountLogs.lastSync = new Date();
+        await userFound.save();
+
+        const accessToken = await generateJwtToken(
+          {
+            userId: userFound._id,
+            userName: userFound.userName,
+          },
+          "ACCESS_TOKEN"
+        );
+
+        return resolve({
+          data: {
+            message: `Login Success`,
+            twoStepVerification,
+            token: accessToken,
+            nextAction: "Initialize"
+          },
+        });
       }
     } catch (error: any) {
       reject({
@@ -229,7 +233,7 @@ export const resetPassword = (password: string, token: string) => {
       userFound.accountDetails.resetPasswdAttempt =
         (userFound.accountDetails.resetPasswdAttempt ?? 0) + 1;
 
-      userFound.save();
+      await userFound.save();
 
       return resolve({
         message: `Cloud password reset successfully`,

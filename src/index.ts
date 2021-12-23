@@ -11,7 +11,7 @@ const NAMESPACE = "Server";
 /* Socket Connection */
 SocketIo(server);
 
-const { SERVER_PORT, SERVER_NODE_ENV, SERVER_HOST } = config.SERVER;
+const { SERVER_PORT, SERVER_NODE_ENV, SERVER_HOST, DOTENV_STATE } = config.SERVER;
 
 app.set("port", SERVER_PORT);
 
@@ -53,7 +53,7 @@ function onError(error: any) {
 function onListen() {
   logger.info(
     NAMESPACE,
-    `Server listening in HOST:[${SERVER_HOST}] PORT:[${SERVER_PORT}] in ${SERVER_NODE_ENV} mode`
+    `Server listening in HOST:[${SERVER_HOST}] PORT:[${SERVER_PORT}] in ${SERVER_NODE_ENV} mode and DOT_ENV_STATE is ${DOTENV_STATE ? "ACTIVE" : "INACTIVE"}`
   );
 }
 

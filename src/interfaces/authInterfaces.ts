@@ -57,6 +57,7 @@ export interface IVerifyOtpResponse {
 export interface ILoginResponse {
   data: {
     message: string;
+    nextAction: "Create_Profile" | "Cloud_Password" | "Initialize";
     twoStepVerification?: boolean;
     token?: string;
   };

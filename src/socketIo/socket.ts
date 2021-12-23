@@ -7,15 +7,23 @@ import adminSocket from "./adminSocket";
 import userAuthSocket from "./userAuthSocket";
 import adminAuthSocket from "./adminAuthSocket";
 
+// {
+//   cors: {
+//     origin: ["https://gs-chat-app.netlify.app/","https://socketserve.io/"],
+//     methods: ["GET", "POST"],
+//     allowedHeaders: ["Authorization"],
+//     // credentials: true,
+//   },
+// }
 const SocketIo = (server: http.Server) => {
-  const io: Server = new Server(server, {
-    cors: {
-      origin: ["https://gs-chat-app.netlify.app/","https://socketserve.io/"],
-      methods: ["GET", "POST"],
-      allowedHeaders: ["Authorization"],
-      // credentials: true,
-    },
-  });
+  const io: Server = new Server(server,{
+      cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+        // allowedHeaders: ["Authorization"],
+        // credentials: true,
+      },
+    });
 
   // Sub sockets
   userSocket(io);
