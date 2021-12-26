@@ -1,12 +1,8 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 import config from "../config/default";
-import { IUser } from "../interfaces/userInterfaces";
+import { IUser, UserBaseDocument } from "../interfaces/userInterfaces";
 import { generateId, generatePassword } from "../functions/default";
-
-interface UserBaseDocument extends IUser, Document {
-  matchPasswords(password: string): boolean;
-}
 
 const userSchema = new Schema<UserBaseDocument>({
   name: {
@@ -31,7 +27,8 @@ const userSchema = new Schema<UserBaseDocument>({
   userStatus: {
     type: String,
     require: true,
-    default: "offline",
+    enum: ["ONLINE","OFFLINE","TYPING"],
+    default: "OFFLINE",
   },
   profilePic: {
     type: String,

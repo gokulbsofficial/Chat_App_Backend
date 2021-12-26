@@ -61,19 +61,19 @@ export const doLogin = (mobile: string, verified: boolean) => {
         userFound.accountLogs.lastSync = new Date();
         await userFound.save();
 
-        const accessToken = await generateJwtToken(
+        const cookieToken = await generateJwtToken(
           {
             userId: userFound._id,
             userName: userFound.userName,
           },
-          "ACCESS_TOKEN"
+          "COOKIE_TOKEN"
         );
 
         return resolve({
           data: {
             message: `Login Success`,
             twoStepVerification,
-            token: accessToken,
+            token: cookieToken,
             nextAction: "Initialize"
           },
         });

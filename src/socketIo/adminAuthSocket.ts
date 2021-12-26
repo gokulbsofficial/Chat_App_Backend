@@ -6,8 +6,6 @@ import * as authHelper from "../helpers/adminAuthHelper";
 import { IErrorResponse } from "../interfaces/default";
 import ErrorResponse from "../classes/errorResponse";
 import * as twilio from "../functions/twillio";
-import cookie from "cookie";
-import setCookies from "../functions/cookie";
 
 const { CONNECTION_EVENT, DISCONNECT_EVENT } = events.SOCKET;
 const { ADMIN_LOGIN, DISCONNECT_ADMIN_AUTH_EVENT } = events.ADMIN_AUTH_SOCKET;
@@ -37,17 +35,7 @@ const adminAuthSocket = (io: Server) => {
         if (!twoStepVerification) {
           // Sent Logged Mail
           console.log(`Your account is logged by ${socket.handshake.address}`);
-          socket.handshake.headers["set-cookie"] = [
-            cookie.serialize("AD-AccessToken", String(token), {
-              expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
-              sameSite: true,
-              secure: true,
-              httpOnly: true,
-            }),
-          ];
         }
-        console.log(socket);
-
         socket.emit(ADMIN_LOGIN, {
           success: true,
           data: {
@@ -57,8 +45,8 @@ const adminAuthSocket = (io: Server) => {
           },
         });
       } catch (error: any) {
-        const Error = new ErrorResponse(error.message, error.code);
-        socket.emit(ADMIN_LOGIN, Error.getErrorData());
+        const errResp = new ErrorResponse(error.message, error.code).getErrorData();
+        socket.emit(ADMIN_LOGIN, errResp);
       }
     });
 

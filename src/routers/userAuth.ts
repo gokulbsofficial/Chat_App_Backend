@@ -2,6 +2,8 @@ import express from "express";
 
 const routers = express.Router();
 
-routers.route("/setCookie").get();
+import { SetCookie } from "../controllers/userAuthControllers"
+
+routers.route("/setCookie").get(SetCookie);
 
 export default routers;

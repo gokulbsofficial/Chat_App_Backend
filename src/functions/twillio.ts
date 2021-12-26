@@ -12,6 +12,7 @@ const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 
 export const sentOtp = (mobile: string, channel: "sms" | "call") => {
   return new Promise<ISentOtpResponse>((resolve, reject) => {
+    console.log(mobile)
     client.verify
       .services(TWILIO_SERVICE_ID)
       .verifications.create({

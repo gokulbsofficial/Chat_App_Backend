@@ -4,13 +4,14 @@ import {
   IAccountLogs,
   IAccountStatus,
 } from "./authInterfaces";
+import { Socket } from "socket.io";
 
 export interface IUser extends Document {
   name: string;
   userName: string;
   mobile: number;
   email?: string;
-  userStatus?: string;
+  userStatus?: "ONLINE" | "OFFLINE" | "TYPING";
   profilePic?: string;
   password: string;
   role?: "USER";
@@ -20,21 +21,11 @@ export interface IUser extends Document {
   accountLogs: IAccountLogs;
 }
 
-// export interface ISeller extends Document {
-//   name: string;
-//   email: string;
-//   profile?: string | null;
-//   password?: string;
-//   mobile?: number | null;
-//   role?: "SELLER";
-//   twoStepVerification?: boolean;
-//   rating?: number;
-//   accountCompanyDetails?: {
-//     brandName: string;
-//     CEO: string;
-//     since: string;
-//   };
-//   accountStatus: IAccountStatus;
-//   accountDetails: IAccountDetails;
-//   accountLogs: IAccountLogs;
-// }
+export interface UserBaseDocument extends IUser, Document {
+  matchPasswords(password: string): boolean;
+}
+
+export interface ISocket extends Socket {
+  user?: IUser,
+  isActive?: boolean 
+}

@@ -58,9 +58,9 @@ const JWT_REFRESH_EXPIRE = process.env.JWT_REFRESH_EXPIRE || "1y";
 const JWT_RESET_SECRET = process.env.JWT_RESET_SECRET || "hriagbjregbbfj";
 const JWT_RESET_EXPIRE = process.env.JWT_RESET_EXPIRE || "5m";
 
-const JWT_ACTIVATION_SECRET =
-  process.env.JWT_ACTIVATION_SECRET || "ethweharibbgfb";
-const JWT_ACTIVATION_EXPIRE = process.env.JWT_ACTIVATION_EXPIRE || "10m";
+const JWT_COOKIE_SECRET =
+  process.env.JWT_COOKIE_SECRET || "ethweharibbgfb";
+const JWT_COOKIE_EXPIRE = process.env.JWT_COOKIE_EXPIRE || "10m";
 
 const JWT_ISSUER = process.env.JWT_ISSUER || SERVER_HOST;
 
@@ -72,8 +72,8 @@ const JWT = {
   JWT_REFRESH_EXPIRE,
   JWT_RESET_SECRET,
   JWT_RESET_EXPIRE,
-  JWT_ACTIVATION_SECRET,
-  JWT_ACTIVATION_EXPIRE,
+  JWT_COOKIE_SECRET,
+  JWT_COOKIE_EXPIRE,
 };
 
 /* TWILIO Config */
@@ -82,8 +82,7 @@ const TWILIO_ACCOUNT_SID =
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN || "TWILIO_AUTH_TOKEN";
 const TWILIO_SERVICE_ID = process.env.TWILIO_SERVICES_ID || "TWILIO_SERVICE_ID";
 const SMS_KEY = process.env.SMS_KEY || null;
-// SK16e1d240a0770c70ff0c81d73a9f2705
-// HOo8jtgYgNf8IVs6NJASXPO6QihtElkq
+
 const TWILIO = {
   TWILIO_ACCOUNT_SID,
   TWILIO_SERVICE_ID,

@@ -1,6 +1,7 @@
 /* Installed Imported Modules */
 import express, { Request, Response } from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 /* Custom Imported Modules */
 import db from "./config/connection";
@@ -17,6 +18,7 @@ const app = express();
 /* Middlewares */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(cors());
 //   (
 //   cors({
@@ -35,7 +37,7 @@ app.use(logMiddleware);
 app.use("/auth/user", userAuthRouter);
 
 app.use("/", (req, res, next) => {
-    res.status(200).json({
+  res.status(200).json({
     success: true,
     message: "Welcome to GS-ChatApp",
   });

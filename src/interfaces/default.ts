@@ -3,7 +3,7 @@ import { ObjectId } from "mongodb";
 export interface IPayload {
   userId?: string | ObjectId;
   adminId?: string | ObjectId;
-  userName?: string;
+  userName?: string | string[];
   email?: string;
 }
 

@@ -23,4 +23,4 @@ export type TokenType =
   | "ACCESS_TOKEN"
   | "REFRESH_TOKEN"
   | "RESET_TOKEN"
-  | "ACTIVATION_TOKEN";
+  | "COOKIE_TOKEN";

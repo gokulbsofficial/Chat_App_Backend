@@ -8,8 +8,8 @@ const {
   JWT_ACCESS_SECRET,
   JWT_REFRESH_EXPIRE,
   JWT_REFRESH_SECRET,
-  JWT_ACTIVATION_EXPIRE,
-  JWT_ACTIVATION_SECRET,
+  JWT_COOKIE_EXPIRE,
+  JWT_COOKIE_SECRET,
   JWT_RESET_EXPIRE,
   JWT_RESET_SECRET,
   JWT_ISSUER,
@@ -105,17 +105,17 @@ export const generateJwtToken = (
           }
         );
         break;
-      case "ACTIVATION_TOKEN":
+      case "COOKIE_TOKEN":
         jwt.sign(
           {
             userId: payload.userId?.toString(),
           },
-          JWT_ACTIVATION_SECRET,
+          JWT_COOKIE_SECRET,
           {
             issuer: JWT_ISSUER,
             subject: type,
             audience: payload.userName,
-            expiresIn: JWT_ACTIVATION_EXPIRE,
+            expiresIn: JWT_COOKIE_EXPIRE,
           },
           (err, token) => {
             if (err) {
@@ -193,8 +193,8 @@ export const verifyJwtToken = (
           }
         });
         break;
-      case "ACTIVATION_TOKEN":
-        jwt.verify(token, JWT_ACTIVATION_SECRET, (err, decoded) => {
+      case "COOKIE_TOKEN":
+        jwt.verify(token, JWT_COOKIE_SECRET, (err, decoded) => {
           if (err) {
             return reject({
               name: err.name,

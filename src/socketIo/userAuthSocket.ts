@@ -1,5 +1,4 @@
 import { Server, Socket } from "socket.io";
-import cookie from "cookie";
 
 import * as authHelper from "../helpers/userAuthHelper";
 import logger from "../config/logger";
@@ -35,8 +34,6 @@ const userAdminSocket = (io: Server) => {
   const auth = io.of("/auth/user");
 
   auth.on(CONNECTION_EVENT, (socket: Socket) => {
-    // const cookies = cookie.parse(socket.request.headers.cookie || "");
-    // logger.info(NAMESPACE, `Cookies => `, cookies);
     logger.info(
       NAMESPACE,
       `New Connection Established in AUTH => ${socket.id}`

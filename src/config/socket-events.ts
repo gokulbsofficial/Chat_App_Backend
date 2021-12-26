@@ -51,7 +51,7 @@ const ADMIN_AUTH_SOCKET = {
 
 const GET_USER_EVENT = "get_user";
 const GET_INBOXES_EVENT = "get_inboxes";
-const SEARCH_USER_EVENT = "search_user";
+const SEARCH_USERS_EVENT = "search_users";
 const GET_CONVERSATION_EVENT = "get_conversation";
 const CREATE_CONVERSATION_EVENT = "create_conversation";
 const SENT_MESSAGE_EVENT = "sent_message";
@@ -59,15 +59,19 @@ const LOGOUT_EVENT = "logout";
 const DISCONNECT_USER_EVENT = "disconnect_user";
 const NEW_INBOX_ARRIVED_EVENT = "new_inbox_arrived";
 const RECIEVED_MESSAGE_EVENT = "recieved_message";
+const GET_USER_STATUS_EVENT = "get_user_status";
+const USER_TYPING_EVENT = "user_typing";
 
 const USER_SOCKET = {
   GET_USER_EVENT,
   GET_INBOXES_EVENT,
-  SEARCH_USER_EVENT,
+  SEARCH_USERS_EVENT,
   GET_CONVERSATION_EVENT,
   CREATE_CONVERSATION_EVENT,
   SENT_MESSAGE_EVENT,
   LOGOUT_EVENT,
+  GET_USER_STATUS_EVENT,
+  USER_TYPING_EVENT,
   DISCONNECT_USER_EVENT,
   NEW_INBOX_ARRIVED_EVENT,
   RECIEVED_MESSAGE_EVENT,
